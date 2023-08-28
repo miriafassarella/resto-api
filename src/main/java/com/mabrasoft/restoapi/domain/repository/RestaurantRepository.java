@@ -1,5 +1,6 @@
 package com.mabrasoft.restoapi.domain.repository;
 
+
 import java.util.List;
 
 import com.mabrasoft.restoapi.domain.model.Restaurant;

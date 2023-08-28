@@ -30,7 +30,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 				.setParameter("name", "%" + name + "%")
 				.getResultList();
 	}
-
+	
 	@Override
 	public Restaurant search(Long id) {
 		// TODO Auto-generated method stub
@@ -51,5 +51,4 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 		
 	}
 
-	
 }

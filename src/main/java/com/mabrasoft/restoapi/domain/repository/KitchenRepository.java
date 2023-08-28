@@ -1,14 +1,14 @@
 package com.mabrasoft.restoapi.domain.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.mabrasoft.restoapi.domain.model.Kitchen;
 
-public interface KitchenRepository {
+@Repository
+public interface KitchenRepository extends JpaRepository<Kitchen, Long>{
 
-	 List<Kitchen> list();
-	 List<Kitchen> byName(String name);
-	 Kitchen search(Long id);
-	 Kitchen add(Kitchen kitchen);
-	 void remove(Long id);
+	 
+	// List<Kitchen> byName(String name);
+	 
 }

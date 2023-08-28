@@ -1,6 +1,7 @@
 package com.mabrasoft.restoapi.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,18 +36,19 @@ public class KitchenController {
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Kitchen> kitchenList(){
-		return kitchenRepository.list();
+		return kitchenRepository.findAll();
 	}
 	
-	@GetMapping("/by-name")
-	public List<Kitchen> KitchenByName(@RequestParam("name") String name){
-		return kitchenRepository.byName(name);
-	}
+	/*
+	 * @GetMapping("/by-name") public List<Kitchen>
+	 * KitchenByName(@RequestParam("name") String name){ return
+	 * kitchenRepository.byName(name); }
+	 */
 	
 	@GetMapping("/{kitchenId}")
 	public ResponseEntity<Kitchen> kitchenSearch(@PathVariable Long kitchenId){
-		Kitchen kitchen =  kitchenRepository.search(kitchenId);
-		 return ResponseEntity.status(HttpStatus.FOUND).body(kitchen);
+	Optional<Kitchen>	kitchen =  kitchenRepository.findById(kitchenId);
+		 return ResponseEntity.status(HttpStatus.FOUND).body(kitchen.get());
 	}
 	
 	@PostMapping()
