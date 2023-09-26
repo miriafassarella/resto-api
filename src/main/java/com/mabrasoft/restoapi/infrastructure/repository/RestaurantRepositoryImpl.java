@@ -33,21 +33,22 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 	
 	@Override
 	public Restaurant search(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return manager.find(Restaurant.class, id);
 	}
 
 	@Transactional
 	@Override
 	public Restaurant add(Restaurant restaurant) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return manager.merge(restaurant);
 	}
 
 	@Transactional
 	@Override
 	public void remove(Long id) {
-		// TODO Auto-generated method stub
+		Restaurant restaurant = search(id);
+		manager.remove(restaurant);
 		
 	}
 

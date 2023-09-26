@@ -1,7 +1,6 @@
 package com.mabrasoft.restoapi.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mabrasoft.restoapi.domain.exception.EntityInUseException;
 import com.mabrasoft.restoapi.domain.exception.EntityNotFoundException;
 import com.mabrasoft.restoapi.domain.model.Kitchen;
 import com.mabrasoft.restoapi.domain.repository.KitchenRepository;
@@ -36,19 +36,22 @@ public class KitchenController {
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Kitchen> kitchenList(){
-		return kitchenRepository.findAll();
+		return kitchenRepository.list();
 	}
 	
-	/*
-	 * @GetMapping("/by-name") public List<Kitchen>
-	 * KitchenByName(@RequestParam("name") String name){ return
-	 * kitchenRepository.byName(name); }
-	 */
+	
+	 @GetMapping("/by-name")
+	 public List<Kitchen> KitchenByName(@RequestParam("name") String name){ 
+		  
+	 return kitchenRepository.byName(name); 
+		  }
+	 
 	
 	@GetMapping("/{kitchenId}")
 	public ResponseEntity<Kitchen> kitchenSearch(@PathVariable Long kitchenId){
-	Optional<Kitchen>	kitchen =  kitchenRepository.findById(kitchenId);
-		 return ResponseEntity.status(HttpStatus.FOUND).body(kitchen.get());
+	
+		Kitchen kitchen = kitchenRepository.search(kitchenId);
+		 return ResponseEntity.status(HttpStatus.FOUND).body(kitchen);
 	}
 	
 	@PostMapping()
@@ -58,12 +61,16 @@ public class KitchenController {
 	}
 	@DeleteMapping("/{kitchenId}")
 	public ResponseEntity<?> kitchenRemove(@PathVariable Long kitchenId){
-		try {
-			kitchenService.remove(kitchenId);
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}catch(EntityNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
+			try {
+				kitchenService.remove(kitchenId);
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			}catch(EntityNotFoundException e) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+			}catch(EntityInUseException e) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+			}
+			
+		
 		
 		}
 	@PutMapping("/{kitchenId}")
