@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,21 +36,13 @@ public class KitchenController {
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Kitchen> kitchenList(){
-		return kitchenRepository.list();
+		return kitchenService.kitchenList();
 	}
-	
-	
-	 @GetMapping("/by-name")
-	 public List<Kitchen> KitchenByName(@RequestParam("name") String name){ 
-		  
-	 return kitchenRepository.byName(name); 
-		  }
-	 
 	
 	@GetMapping("/{kitchenId}")
 	public ResponseEntity<Kitchen> kitchenSearch(@PathVariable Long kitchenId){
 	
-		Kitchen kitchen = kitchenRepository.search(kitchenId);
+		Kitchen kitchen = kitchenService.search(kitchenId);
 		 return ResponseEntity.status(HttpStatus.FOUND).body(kitchen);
 	}
 	
@@ -69,9 +61,6 @@ public class KitchenController {
 			}catch(EntityInUseException e) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 			}
-			
-		
-		
 		}
 	@PutMapping("/{kitchenId}")
 	public ResponseEntity<?> kitchenUpdate(@PathVariable Long kitchenId, @RequestBody Kitchen kitchen){

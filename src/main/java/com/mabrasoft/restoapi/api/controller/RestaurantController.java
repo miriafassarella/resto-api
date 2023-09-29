@@ -4,30 +4,55 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mabrasoft.restoapi.domain.model.Restaurant;
-import com.mabrasoft.restoapi.domain.repository.RestaurantRepository;
+
+import com.mabrasoft.restoapi.domain.service.RestaurantService;
 
 @RestController
 @RequestMapping("/restaurants")
 public class RestaurantController {
 	
 	@Autowired
-	RestaurantRepository restaurantRepository;
+	RestaurantService restaurantService;
 
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Restaurant> restaurantList(){
-		return restaurantRepository.list();
+		return restaurantService.list();
 	}
 	
-	@GetMapping("/by-name")
-	public List<Restaurant> restaurantByName(@RequestParam("name") String name){
-		return restaurantRepository.byName(name);
+	@GetMapping("/{restaurantId}")
+	public ResponseEntity<Restaurant> restaurantByName(@PathVariable Long restaurantId){
+		Restaurant restaurant = restaurantService.search(restaurantId);
+		return ResponseEntity.status(HttpStatus.FOUND).body(restaurant);
+	}
+	
+	@PostMapping
+	public ResponseEntity<Restaurant> add(@RequestBody Restaurant restaurant){
+		Restaurant restaurantSave = restaurantService.add(restaurant);
+		return ResponseEntity.status(HttpStatus.CREATED).body(restaurantSave);
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<Restaurant> remove(@RequestBody Restaurant restaurant){
+		 restaurantService.remove(restaurant);
+		 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+	
+	@PutMapping("/{restaurantId}")
+	public ResponseEntity<?> update(@PathVariable Long restaurantId, @RequestBody Restaurant restaurant){
+		Restaurant restaurantCurrent = restaurantService.update(restaurantId, restaurant);
+		return ResponseEntity.status(HttpStatus.OK).body(restaurantCurrent);
 	}
 }

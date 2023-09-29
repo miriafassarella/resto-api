@@ -1,15 +1,13 @@
 package com.mabrasoft.restoapi.domain.repository;
 
 
-import java.util.List;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mabrasoft.restoapi.domain.model.Restaurant;
 
-public interface RestaurantRepository {
+public interface RestaurantRepository extends JpaRepository<Restaurant, Long>{
 
-	List<Restaurant> list();
-	List<Restaurant> byName(String name);
-	Restaurant search(Long id);
-	Restaurant add(Restaurant restaurant);
-	void remove(Long id);
+	
 }

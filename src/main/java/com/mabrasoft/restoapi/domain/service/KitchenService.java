@@ -1,6 +1,9 @@
 package com.mabrasoft.restoapi.domain.service;
 
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,33 +18,42 @@ import com.mabrasoft.restoapi.domain.repository.KitchenRepository;
 public class KitchenService {
 
 	@Autowired
-	KitchenRepository kitchenRepository;
+	private KitchenRepository kitchenRepository;
 	
-	public Kitchen add(Kitchen kitchen) {
-		return kitchenRepository.add(kitchen);
+	public List<Kitchen> kitchenList(){
+		return kitchenRepository.findAll();
 	}
 	
-	public void remove(Long kitcheId) {
-		Kitchen kitchen = kitchenRepository.search(kitcheId);
+	public Kitchen search(Long kitchenId) {
+		Optional<Kitchen> kitchen = kitchenRepository.findById(kitchenId);
+		return kitchen.get();
+	}
+	
+	public Kitchen add(Kitchen kitchen) {
+		return kitchenRepository.save(kitchen);
+	}
+	
+	public void remove(Long kitchenId) {
+		Optional<Kitchen> kitchen = kitchenRepository.findById(kitchenId);
 
 		try {
-			if(kitchen != null) {
-				kitchenRepository.remove(kitcheId);
+			if(kitchen.get() != null) {
+				kitchenRepository.delete(kitchen.get());;
 			}else {
-				throw new EntityNotFoundException(String.format("Code entity %d not found!", kitcheId));
+				throw new EntityNotFoundException(String.format("Code entity %d not found!", kitchenId));
 			}
 		}catch(DataIntegrityViolationException e) {
-			throw new EntityInUseException(String.format("Entity code %d is in use!", kitcheId));
+			throw new EntityInUseException(String.format("Entity code %d is in use!", kitchenId));
 		}
 		}
 	
 	public Kitchen update(Long kitchenId, Kitchen kitchen) {
-		Kitchen currentKitchen = kitchenRepository.search(kitchenId);
+		Optional<Kitchen> currentkitchen = kitchenRepository.findById(kitchenId);
 		
-		if(currentKitchen != null) {
+		if(currentkitchen.get() != null) {
 			kitchen.setId(kitchenId);
-			BeanUtils.copyProperties(kitchen, currentKitchen);
-			return kitchenRepository.add(kitchen);
+			BeanUtils.copyProperties(kitchen, currentkitchen);
+			return kitchenRepository.save(kitchen);
 		}
 		throw new EntityNotFoundException(String.format("Code entity %d not found!", kitchenId));
 	}
