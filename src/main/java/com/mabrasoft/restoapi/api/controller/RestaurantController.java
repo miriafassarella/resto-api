@@ -44,9 +44,9 @@ public class RestaurantController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(restaurantSave);
 	}
 	
-	@DeleteMapping
-	public ResponseEntity<Restaurant> remove(@RequestBody Restaurant restaurant){
-		 restaurantService.remove(restaurant);
+	@DeleteMapping("/{restaurantId}")
+	public ResponseEntity<Restaurant> remove(@PathVariable Long restaurantId){
+		 restaurantService.remove(restaurantId);
 		 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	

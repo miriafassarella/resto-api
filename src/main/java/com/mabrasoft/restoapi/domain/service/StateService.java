@@ -31,8 +31,9 @@ public class StateService {
 		return stateRepositoy.save(state);
 	}
 	
-	public void remove(State state) {
-		stateRepositoy.delete(state);
+	public void remove(Long stateId) {
+		Optional<State> state = stateRepositoy.findById(stateId);
+		stateRepositoy.delete(state.get());
 	}
 	
 	public State update(Long stateId, State state) {

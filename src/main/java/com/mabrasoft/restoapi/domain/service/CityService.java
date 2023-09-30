@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.mabrasoft.restoapi.domain.exception.EntityNotFoundException;
 import com.mabrasoft.restoapi.domain.model.City;
-import com.mabrasoft.restoapi.domain.model.Restaurant;
+
 import com.mabrasoft.restoapi.domain.repository.CityRepository;
 
 @Service
@@ -31,8 +31,9 @@ public class CityService {
 		return cityRepository.save(city);
 	}
 	
-	public void remove(City city) {
-		cityRepository.delete(city);
+	public void remove(Long cityId) {
+		Optional<City> city = cityRepository.findById(cityId);
+		cityRepository.delete(city.get());
 	}
 	
 	public City update(Long cityId, City city) {

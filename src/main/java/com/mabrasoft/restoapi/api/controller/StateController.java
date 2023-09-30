@@ -36,8 +36,8 @@ public class StateController {
 	}
 	
 	@GetMapping("/{stateId}")
-	public ResponseEntity<State> stateByName(@PathVariable Long statetId){
-		State state = stateService.search(statetId);
+	public ResponseEntity<State> search(@PathVariable Long stateId){
+		State state = stateService.search(stateId);
 		return ResponseEntity.status(HttpStatus.FOUND).body(state);
 	}
 	
@@ -47,9 +47,9 @@ public class StateController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(stateSave);
 	}
 	
-	@DeleteMapping
-	public ResponseEntity<State> remove(@RequestBody State state){
-		 stateService.remove(state);
+	@DeleteMapping("/{stateId}")
+	public ResponseEntity<State> remove(@PathVariable Long stateId){
+		stateService.remove(stateId);
 		 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	

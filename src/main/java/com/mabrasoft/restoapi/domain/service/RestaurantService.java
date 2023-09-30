@@ -30,8 +30,9 @@ public class RestaurantService {
 		return restaurantRepository.save(restaurant);
 	}
 	
-	public void remove(Restaurant restaurant) {
-		restaurantRepository.delete(restaurant);
+	public void remove(Long restaurantId) {
+		Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
+		restaurantRepository.delete(restaurant.get());
 	}
 	
 	public Restaurant update(Long restaurantId, Restaurant restaurant) {
