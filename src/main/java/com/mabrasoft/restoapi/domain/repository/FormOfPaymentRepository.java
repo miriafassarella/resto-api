@@ -3,11 +3,9 @@ package com.mabrasoft.restoapi.domain.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mabrasoft.restoapi.domain.model.State;
+import com.mabrasoft.restoapi.domain.model.FormOfPayment;
 
 @Repository
-public interface StateRepository  extends JpaRepository<State, Long>{
-	
-	
+public interface FormOfPaymentRepository extends JpaRepository<FormOfPayment, Long> {
 
 }

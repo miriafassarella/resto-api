@@ -43,7 +43,7 @@ public class CityService {
 			BeanUtils.copyProperties(city, cityCurrent.get(), "id");
 			return cityRepository.save(cityCurrent.get());
 		}
-		throw new EntityNotFoundException(String.format("The code %d restaurant does not exist", cityId));
+		throw new EntityNotFoundException(String.format("The code %d city does not exist", cityId));
 	}
 
 }
