@@ -1,5 +1,6 @@
 package com.mabrasoft.restoapi.domain.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mabrasoft.restoapi.domain.exception.EntityNotFoundException;
+import com.mabrasoft.restoapi.domain.model.Kitchen;
 import com.mabrasoft.restoapi.domain.model.Restaurant;
 import com.mabrasoft.restoapi.domain.repository.RestaurantRepository;
 
@@ -24,6 +26,14 @@ public class RestaurantService {
 	public Restaurant search(Long restaurantId){
 		Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
 		return restaurant.get();
+	}
+	
+	public List<Restaurant> byName(String name) {
+		return restaurantRepository.name(name);
+	}
+	
+	public List<Restaurant> byFreight(BigDecimal freight){
+		return restaurantRepository.freight(freight);
 	}
 	
 	public Restaurant add(Restaurant restaurant) {

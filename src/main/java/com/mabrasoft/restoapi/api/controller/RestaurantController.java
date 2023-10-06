@@ -1,5 +1,6 @@
 package com.mabrasoft.restoapi.api.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,16 @@ public class RestaurantController {
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Restaurant> restaurantList(){
 		return restaurantService.list();
+	}
+	
+	@GetMapping("/byname")
+	public List<Restaurant> byName(String name){
+		return restaurantService.byName(name);
+	}
+	
+	@GetMapping("/byfreight")
+	public List<Restaurant> byFreight(BigDecimal freight){
+		return restaurantService.byFreight(freight);
 	}
 	
 	@GetMapping("/{restaurantId}")

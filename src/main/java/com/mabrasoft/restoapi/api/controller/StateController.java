@@ -35,6 +35,11 @@ public class StateController {
 		return stateService.list();
 	}
 	
+	@GetMapping("/byname")
+	public List<State> byName(String name){
+		return stateService.byState(name);
+	}
+	
 	@GetMapping("/{stateId}")
 	public ResponseEntity<State> search(@PathVariable Long stateId){
 		State state = stateService.search(stateId);

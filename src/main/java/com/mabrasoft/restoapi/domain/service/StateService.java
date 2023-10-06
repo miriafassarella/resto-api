@@ -21,6 +21,9 @@ public class StateService {
 	public List<State> list(){
 		return stateRepositoy.findAll();
 	}
+	public List<State> byState(String name){
+		return stateRepositoy.name(name);
+	}
 	
 	public State search(Long stateId){
 		Optional<State> state = stateRepositoy.findById(stateId);

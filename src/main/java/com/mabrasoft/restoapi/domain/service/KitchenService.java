@@ -28,6 +28,9 @@ public class KitchenService {
 		Optional<Kitchen> kitchen = kitchenRepository.findById(kitchenId);
 		return kitchen.get();
 	}
+	public List<Kitchen> findName(String name) {
+		return kitchenRepository.name(name);
+	}
 	
 	public Kitchen add(Kitchen kitchen) {
 		return kitchenRepository.save(kitchen);

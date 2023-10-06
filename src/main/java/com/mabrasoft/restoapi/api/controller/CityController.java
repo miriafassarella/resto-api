@@ -35,6 +35,11 @@ public class CityController {
 		return cityService.list();
 	}
 	
+	@GetMapping("/byname")
+	public List<City> byName(String name){
+		return cityService.byname(name);
+	}
+	
 	@GetMapping("/{cityId}")
 	public ResponseEntity<City> cityByName(@PathVariable Long cityId){
 		City city = cityService.search(cityId);

@@ -1,5 +1,6 @@
 package com.mabrasoft.restoapi.api.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,11 @@ public class KitchenController {
 	
 		Kitchen kitchen = kitchenService.search(kitchenId);
 		 return ResponseEntity.status(HttpStatus.FOUND).body(kitchen);
+	}
+	
+	@GetMapping("/byname")
+	public List<Kitchen> findName(String name){
+		return kitchenService.findName(name);
 	}
 	
 	@PostMapping()

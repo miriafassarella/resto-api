@@ -21,7 +21,9 @@ public class CityService {
 	public List<City> list(){
 		return cityRepository.findAll();
 	}
-	
+	public List<City> byname(String name){
+		return cityRepository.name(name);
+	}
 	public City search(Long cityId){
 		Optional<City> city = cityRepository.findById(cityId);
 		return city.get();

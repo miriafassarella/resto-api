@@ -23,6 +23,10 @@ public class PermissionService {
 		return permissionRepository.findAll();
 	}
 	
+	public List<Permission> byName(String name){
+		return permissionRepository.name(name);
+	}
+	
 	public Permission search(Long permissionId){
 		Optional<Permission> permission = permissionRepository.findById(permissionId);
 		return permission.get();

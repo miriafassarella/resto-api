@@ -34,6 +34,10 @@ public class PermissionController {
 		return permissionService.list();
 	}
 	
+	@GetMapping("/byname")
+	public List<Permission> byName(String name){
+		return permissionService.byName(name);
+	}
 	@GetMapping("/{cityId}")
 	public ResponseEntity<Permission> cityByName(@PathVariable Long permissionId){
 		Permission permission = permissionService.search(permissionId);
@@ -46,13 +50,13 @@ public class PermissionController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(permissionSave);
 	}
 	
-	@DeleteMapping("/{cityId}")
+	@DeleteMapping("/{permissionId}")
 	public ResponseEntity<Permission> remove(@PathVariable Long permissionId){
 		permissionService.remove(permissionId);
 		 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
-	@PutMapping("/{cityId}")
+	@PutMapping("/{permissionId}")
 	public ResponseEntity<?> update(@PathVariable Long permissionId, @RequestBody Permission permission){
 		Permission permissionCurrent = permissionService.update(permissionId, permission);
 		return ResponseEntity.status(HttpStatus.OK).body(permissionCurrent);
