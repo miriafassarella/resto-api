@@ -15,8 +15,8 @@ import com.mabrasoft.restoapi.domain.model.Restaurant;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long>{
 
-	List<Restaurant> name(String name);
+	List<Restaurant> findByNameContaining(String name);
 	
-	List<Restaurant> freight(BigDecimal freight);
+	List<Restaurant> findByFreight(BigDecimal freight);
 	
 }

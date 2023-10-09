@@ -10,5 +10,5 @@ import com.mabrasoft.restoapi.domain.model.Permission;
 @Repository
 public interface PermissionRepository extends JpaRepository<Permission, Long> {
 
-	List<Permission> name(String name);
+	List<Permission> findByNameContaining(String name);
 }

@@ -29,7 +29,7 @@ public class KitchenService {
 		return kitchen.get();
 	}
 	public List<Kitchen> findName(String name) {
-		return kitchenRepository.name(name);
+		return kitchenRepository.findByNameContaining(name);
 	}
 	
 	public Kitchen add(Kitchen kitchen) {

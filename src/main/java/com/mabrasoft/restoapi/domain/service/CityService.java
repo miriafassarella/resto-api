@@ -22,7 +22,7 @@ public class CityService {
 		return cityRepository.findAll();
 	}
 	public List<City> byname(String name){
-		return cityRepository.name(name);
+		return cityRepository.findByNameContaining(name);
 	}
 	public City search(Long cityId){
 		Optional<City> city = cityRepository.findById(cityId);

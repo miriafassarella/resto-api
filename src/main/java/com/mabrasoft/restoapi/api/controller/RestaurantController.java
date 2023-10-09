@@ -20,8 +20,11 @@ import com.mabrasoft.restoapi.domain.model.Restaurant;
 
 import com.mabrasoft.restoapi.domain.service.RestaurantService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/restaurants")
+@Tag(name = "Restaurants")
 public class RestaurantController {
 	
 	@Autowired

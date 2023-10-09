@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mabrasoft.restoapi.domain.exception.EntityNotFoundException;
-import com.mabrasoft.restoapi.domain.model.Kitchen;
+
 import com.mabrasoft.restoapi.domain.model.Restaurant;
 import com.mabrasoft.restoapi.domain.repository.RestaurantRepository;
 
@@ -29,11 +29,11 @@ public class RestaurantService {
 	}
 	
 	public List<Restaurant> byName(String name) {
-		return restaurantRepository.name(name);
+		return restaurantRepository.findByNameContaining(name);
 	}
 	
 	public List<Restaurant> byFreight(BigDecimal freight){
-		return restaurantRepository.freight(freight);
+		return restaurantRepository.findByFreight(freight);
 	}
 	
 	public Restaurant add(Restaurant restaurant) {

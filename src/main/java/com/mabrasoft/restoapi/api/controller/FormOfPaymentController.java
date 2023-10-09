@@ -19,9 +19,12 @@ import com.mabrasoft.restoapi.domain.model.FormOfPayment;
 
 import com.mabrasoft.restoapi.domain.service.FormOfPaymentService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @RestController
 @RequestMapping("/methodspayments")
+@Tag(name = "Payments")
 public class FormOfPaymentController {
 
 	@Autowired

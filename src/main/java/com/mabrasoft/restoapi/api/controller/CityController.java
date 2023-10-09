@@ -20,9 +20,12 @@ import com.mabrasoft.restoapi.domain.model.City;
 
 import com.mabrasoft.restoapi.domain.service.CityService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @RestController
 @RequestMapping("/cities")
+@Tag(name = "Cities")
 public class CityController {
 
 	@Autowired

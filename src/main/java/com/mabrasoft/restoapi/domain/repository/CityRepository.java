@@ -12,5 +12,5 @@ import com.mabrasoft.restoapi.domain.model.City;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long>{
 		
-	List<City> name(String name);
+	List<City> findByNameContaining(String name);
 }

@@ -20,10 +20,13 @@ import com.mabrasoft.restoapi.domain.model.State;
 
 import com.mabrasoft.restoapi.domain.service.StateService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 
 @RestController
 @RequestMapping("/states")
+@Tag(name = "States")
 public class StateController {
 	
 	@Autowired

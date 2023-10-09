@@ -24,8 +24,11 @@ import com.mabrasoft.restoapi.domain.model.Kitchen;
 import com.mabrasoft.restoapi.domain.repository.KitchenRepository;
 import com.mabrasoft.restoapi.domain.service.KitchenService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/kitchens")
+@Tag(name = "Kitchens")
 public class KitchenController {
 	
 	@Autowired

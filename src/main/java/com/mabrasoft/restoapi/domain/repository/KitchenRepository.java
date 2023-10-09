@@ -11,6 +11,6 @@ import com.mabrasoft.restoapi.domain.model.Kitchen;
 @Repository
 public interface KitchenRepository extends JpaRepository<Kitchen, Long>, KitchenRepositoryQueries{
 
-	List<Kitchen> name(String name); 
+	List<Kitchen> findByNameContaining(String name); 
 	
 }

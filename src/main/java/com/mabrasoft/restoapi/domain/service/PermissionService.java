@@ -24,7 +24,7 @@ public class PermissionService {
 	}
 	
 	public List<Permission> byName(String name){
-		return permissionRepository.name(name);
+		return permissionRepository.findByNameContaining(name);
 	}
 	
 	public Permission search(Long permissionId){

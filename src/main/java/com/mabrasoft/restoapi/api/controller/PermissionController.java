@@ -20,8 +20,11 @@ import com.mabrasoft.restoapi.domain.model.Permission;
 
 import com.mabrasoft.restoapi.domain.service.PermissionService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/permissions")
+@Tag(name = "Permissions")
 public class PermissionController {
 
 	@Autowired

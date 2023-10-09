@@ -22,7 +22,7 @@ public class StateService {
 		return stateRepositoy.findAll();
 	}
 	public List<State> byState(String name){
-		return stateRepositoy.name(name);
+		return stateRepositoy.findByNameContaining(name);
 	}
 	
 	public State search(Long stateId){
